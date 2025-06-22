@@ -24,13 +24,19 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install pyinstaller
           pyinstaller --onefile --windowed --add-data format.properties;. --name frecri main.py
-        
-      - name: Package executable into zip
-        run: |
-            powershell Compress-Archive -Path dist\frecri.exe -DestinationPath dist\frecri-win.zip
 
       - name: Upload executable
         uses: actions/upload-artifact@v4
         with:
           name: frecri-win-zip
           path: dist/frecri-win.zip
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: Latest Windows Build
+          files: dist/frecri.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
