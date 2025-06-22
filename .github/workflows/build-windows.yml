@@ -21,7 +21,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install googletrans==4.0.2
+          python -m pip install pyinstaller googletrans==4.0.2
     
       - name: Check PyInstaller installation
         run: python -m pip show pyinstaller
