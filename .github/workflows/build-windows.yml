@@ -23,8 +23,8 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install googletrans==4.0.2
     
-      - name: Check installed packages (debug)
-        run: pip list
+      - name: Check PyInstaller installation
+        run: python -m pip show pyinstaller
 
       - name: List files (debug)
         run: dir
