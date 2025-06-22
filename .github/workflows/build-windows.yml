@@ -18,16 +18,19 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install dependencies
+      - name: Install and run PyInstaller
+        shell: cmd
         run: |
           python -m pip install --upgrade pip
-
-      - name: Build executable with PyInstaller
+          python -m pip install pyinstaller
+          pyinstaller --onefile --windowed --add-data format.properties;. --name frecri main.py
+        
+      - name: Package executable into zip
         run: |
-          pyinstaller --onefile --windowed --add-data "format.propierties;." main.py
+            powershell Compress-Archive -Path dist\frecri.exe -DestinationPath dist\frecri-win.zip
 
       - name: Upload executable
         uses: actions/upload-artifact@v4
         with:
-          name: main-exe
-          path: dist/main.exe
+          name: frecri-win-zip
+          path: dist/frecri-win.zip
