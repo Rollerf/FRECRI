@@ -1,4 +1,6 @@
 from tkinter import *
+import sys
+import os
 
 def fileReader(fic):
     file = []
@@ -15,12 +17,20 @@ def replaceCharacters(fileProperties, fileInput):
   
   return fileInput
 
+def get_properties_path():
+    if getattr(sys, 'frozen', False):
+        base_path = sys._MEIPASS
+    else:
+        base_path = os.path.dirname(__file__)
+    return os.path.join(base_path, 'format.properties')
+
 def transform():
   fileProperties = []
   fileInput = inputText.get("1.0", "end")
 
-  fic = open("format.properties", "r", encoding="utf8")
-  fileProperties = fileReader(fic)
+  properties_path = get_properties_path()
+  with open(properties_path, "r", encoding="utf8") as fic:
+    fileProperties = fileReader(fic)
 
   fileOutput = replaceCharacters(fileProperties, fileInput)
 
