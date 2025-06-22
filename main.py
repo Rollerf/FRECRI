@@ -19,7 +19,7 @@ def transform():
   fileProperties = []
   fileInput = inputText.get("1.0", "end")
 
-  fic = open("format.propierties", "r", encoding="utf8")
+  fic = open("format.properties", "r", encoding="utf8")
   fileProperties = fileReader(fic)
 
   fileOutput = replaceCharacters(fileProperties, fileInput)
